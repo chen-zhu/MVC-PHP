@@ -1,10 +1,19 @@
 <?php 
 
-$url = $_GET['url'];
+//TODO: Change ini file instead!
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-echo 'URL: ', $url;
+//TODO: use auto loader
+require 'libs/Bootstrap.php';
+require 'libs/Controller.php';
+require 'libs/View.php';
+require 'libs/Model.php';
+
+$app = new Bootstrap();
+
 
 
 
 ?>
-<br>1
