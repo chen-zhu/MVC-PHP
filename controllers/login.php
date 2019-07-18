@@ -2,7 +2,7 @@
 
 //index controler
 
-class Index extends Controller{
+class Login extends Controller{
 	
 	function __construct(){
 		parent::__construct();
@@ -10,13 +10,9 @@ class Index extends Controller{
 	
 	public function index(){
 		//calling render function from view object to complete UI!
-		$this->view->render('index/index');
+		$this->view->render('login/index');
 	}
 	
-	public function details(){
-		echo '12345';
-		$this->view->render('index/index');
-	}
 }
 
 
