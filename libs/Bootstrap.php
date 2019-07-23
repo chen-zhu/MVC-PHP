@@ -16,32 +16,42 @@ class Bootstrap {
 		if(file_exists($file)){
 			require_once $file;
 		} else {
-			require_once 'controllers/errors.php';
-			$controller = new Errors();
+			//require_once 'controllers/errors.php';
+			//$controller = new Errors();
+			//return false;
+			$this->errors();
 			return false;
 		}
 		
 		//initialize controller.
 		$controller = new $url[0];
-
+		$controller->loadModel($url[0]);
+		
 		//if index is set with params, pass into method.
 		if(isset($url[2]) && isset($url[1])){
 			if(method_exists($controller, $url[1])){
 				$controller->{$url[1]}($url[2]);
 			} else {
-				echo 'err';
+				$this->errors();
 			}
 		} elseif(isset($url[1])){
 			//if method name is set, call this function under the controller!
 			if(method_exists($controller, $url[1])){
 				$controller->{$url[1]}();
 			} else {
-				echo 'errrr';
+				$this->errors();
 			}
 		} else {
 			$controller->index();		
 		}
 		
+	}
+	
+	function errors(){
+		require 'controllers/errors.php';
+		$controller = new Errors();
+		$controller->index();
+		return false;
 	}
 	
 	
