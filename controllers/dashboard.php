@@ -24,7 +24,7 @@ class Dashboard extends Controller{
 	
 	public function logout(){
 		Session::destroy();
-		header('location: ../login'); //bring users back to login page. 
+		header('location: ' . URL . 'login'); //bring users back to login page. 
 		exit;
 	}
 	
