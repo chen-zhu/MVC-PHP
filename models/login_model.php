@@ -12,10 +12,10 @@ class login_model extends Model{
 		$password = $_POST['password'];		
 		$db_query = $this->db->prepare("select id, role from users "
 				. "where login = :login "
-					. "and password = MD5(:password) ");
+					. "and password = :password ");
 		$db_query->execute(array(
 			':login' => $login, 
-			':password' => $password,
+			':password' => Hash::create('md5', $password, HASH_KEY),
 		));
 		
 		$data = $db_query->fetch();

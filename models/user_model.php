@@ -24,7 +24,7 @@ class user_model extends Model{
 				. 'values (:login, :password, :role) ');
 		$db_query->execute(array(
 			'login' => $data['login'], 
-			'password' => $data['password'], 
+			'password' => Hash::create('md5', $data['password'], HASH_KEY), 
 			'role' => $data['role'], 
 		));
 		//return $db_query->fetchAll();
@@ -35,7 +35,7 @@ class user_model extends Model{
 				. 'where `id` = :id');
 		$db_query->execute(array(
 			'login' => $data['login'], 
-			'password' => $data['password'], 
+			'password' => Hash::create('md5', $data['password'], HASH_KEY), 
 			'role' => $data['role'], 
 			'id' => $data['id'],
 		));
