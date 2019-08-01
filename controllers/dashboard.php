@@ -13,6 +13,8 @@ class Dashboard extends Controller{
 			header('location: ../login'); //bring users back to login page. 
 			exit;
 		}
+		
+		$this->view->js = array('dashboard/js/default.js'); //it will be used to load js script for dashboard.
 	}
 	
 	public function index(){
@@ -22,11 +24,21 @@ class Dashboard extends Controller{
 	
 	public function logout(){
 		Session::destroy();
-		header('location: ../login'); //bring users back to login page. 
+		header('location: ' . URL . 'login'); //bring users back to login page. 
 		exit;
 	}
 	
+	//xhr --> XML HTTP Request
+	public function xhrInsert(){
+		//call dashbaord model here to perform insert!
+		$this->model->xhrInsert();
+	}
+	
+	function xhrGetListings(){
+		$this->model->xhrGetListings();
+	}
+	
+	function xhrDeleteListing(){
+		$this->model->xhrDeleteListing(); 
+	}
 }
-
-
-
