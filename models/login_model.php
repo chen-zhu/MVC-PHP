@@ -10,19 +10,17 @@ class login_model extends Model{
 		//TODO: create form object in the future!
 		$login = $_POST['login'];
 		$password = $_POST['password'];		
-		$db_query = $this->db->prepare("select id, role from users "
-				. "where login = :login "
-					. "and password = :password ");
-		$db_query->execute(array(
-			':login' => $login, 
-			':password' => Hash::create('md5', $password, HASH_KEY),
-		));
 		
-		$data = $db_query->fetch();
-		$role = $data['role'];
+		$data = $this->db->select('users', 
+				array(
+						'login' => $login, 
+						'password' => Hash::create('md5', $password, HASH_KEY),
+					), 
+				array('id', 'role'))[0]; 
 		
-		$count = $db_query->rowCount();
-		if($count > 0){
+		$role = @$data['role'];
+		
+		if(@$data && $role){
 			//login
 			Session::init();
 			Session::set('role', $role);

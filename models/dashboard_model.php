@@ -10,24 +10,23 @@ class dashboard_model extends Model{
 	
 	function xhrInsert(){ 
 		$text = @$_POST['text'];
-		$db_query = $this->db->prepare('insert into data (text) values (:text)');
-		$db_query->execute(array(':text' => $text));
-		
-		$data = array('text' => $text, 'id' => $this->db->lastInsertId());
+		$insert = $this->db->insert('data', array('text' => $text));
+		$data = array('text' => $text, 'id' => $this->db->get_last_insert_id());
 		echo json_encode($data);
 	}
 	
 	function xhrGetListings(){
-		$db_query = $this->db->prepare('select * from data');
-		$db_query->execute();
-		echo json_encode($db_query->fetchAll());
+		$data = $this->db->select('data', array());
+		//TODO: Pagination/offset!
+		
+		echo json_encode($data);
 	}
 	
 	function xhrDeleteListing(){
 		$id = @$_POST['id'];
 		if($id){
-			$db_query = $this->db->prepare('Delete from data where id = "' . $id . '"');
-			$db_query->execute();
+			$del = $this->db->delete('data', array('id' => $id), true);
+			//maybe need to check if delete is successful or not!
 			echo json_encode(array('success' => true));
 		}
 	}
