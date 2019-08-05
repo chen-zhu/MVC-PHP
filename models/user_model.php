@@ -37,6 +37,10 @@ class user_model extends Model{
 			
 	public function delete($id){
 		if($id){
+			$user = $this->db->select('users', array('id' => $id), array('role'))[0];
+			if($user['role'] == 'owner'){
+				return; //DO NOT DELETE OWNER! Add error message here!
+			}
 			$del = $this->db->delete('users', array('id' => $id), true);			
 		}
 	}

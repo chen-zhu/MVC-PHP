@@ -4,6 +4,8 @@ class Bootstrap {
 	
 	function __construct() {
 		//0 => call url/controller, 1 => call method, 3 => arguments
+		$url = (string)@$_GET['url'];
+		$url = filter_var($url, FILTER_SANITIZE_URL); //security issue!
 		$url = explode('/', trim((string)@$_GET['url'], '/'));
 
 		//print_r($url);
