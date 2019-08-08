@@ -6,7 +6,8 @@ class User extends Controller{
 	
 	public function __construct(){
 		parent::__construct();
-		Session::init();
+		Session::checkUserLoginStatus(array('owner'));
+		/*Session::init();
 		$logged = Session::get('loggedIn');
 		$role = Session::get('role'); //also check permissions here!
 		
@@ -14,7 +15,7 @@ class User extends Controller{
 			Session::destroy();//in case.
 			header('location: ../login'); //bring users back to login page. 
 			exit;
-		}
+		}*/
 		
 	}
 	

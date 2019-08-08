@@ -25,6 +25,7 @@ class login_model extends Model{
 			Session::init();
 			Session::set('role', $role);
 			Session::set('loggedIn', true);
+			Session::set('userid', @$data['id']);
 			header('location: ../dashboard');
 		} else {
 			header('location: ../login');

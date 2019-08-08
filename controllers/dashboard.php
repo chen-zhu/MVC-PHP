@@ -6,14 +6,15 @@ class Dashboard extends Controller{
 	
 	function __construct(){
 		parent::__construct();
-		Session::init();
+		
+		/*Session::init();
 		$logged = Session::get('loggedIn');
 		if($logged == false){
 			Session::destroy();//in case.
 			header('location: ../login'); //bring users back to login page. 
 			exit;
-		}
-		
+		}*/
+		Session::checkUserLoginStatus(array());
 		$this->view->js = array('dashboard/js/default.js'); //it will be used to load js script for dashboard.
 	}
 	
